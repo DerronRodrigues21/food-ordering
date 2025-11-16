@@ -1,0 +1,94 @@
+:root{
+  --bg:#fff7f6;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#E23744;
+  --accent-2:#FFCC00; /* rupee badge yellow */
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+  --radius:12px;
+  --mono: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:var(--mono);background:linear-gradient(180deg,#fff,#fff7f6);color:#111}
+.container{max-width:1100px;margin:34px auto;padding:20px}
+
+/* header */
+.header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.logo img{width:44px;height:44px;border-radius:8px;object-fit:cover}
+.header-center{flex:1; display:flex; justify-content:center}
+.search-bar{display:flex;align-items:center;gap:8px;width:100%;max-width:920px}
+.search-bar input{flex:1;padding:10px;border-radius:10px;border:1px solid #f1dede;font-size:15px}
+.search-bar .btn{white-space:nowrap;padding:10px 14px}
+.header-actions{display:flex;align-items:center;gap:12px}
+
+/* restaurant card */
+.restaurant-card{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:12px;border-radius:10px;background:var(--card);box-shadow:0 6px 18px rgba(0,0,0,0.03);margin-bottom:12px;
+  position:relative; overflow:hidden;
+}
+.img-wrap{position:relative;width:140px;height:90px;flex-shrink:0;border-radius:8px;overflow:hidden;background:#f8f3f3}
+.restaurant-card img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* rupee badge */
+.rupee-badge{
+  position:absolute;
+  top:8px;
+  right:8px;
+  background:var(--accent-2);
+  color:#222;
+  padding:6px 8px;
+  border-radius:14px;
+  font-weight:700;
+  box-shadow:0 6px 14px rgba(0,0,0,0.12);
+  display:inline-flex;
+  gap:6px;
+  align-items:center;
+  z-index:5;
+  font-size:14px;
+}
+.rupee-badge .dot{width:8px;height:8px;border-radius:50%;background:#fff;opacity:0.2;margin-left:4px}
+
+/* meta */
+.restaurant-meta{flex:1;display:flex;flex-direction:column}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cuisine{color:var(--muted);font-size:13px}
+
+/* menu items */
+.menu-item{
+  padding:8px;border-top:1px solid #f6eaea;display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.menu-item .left{display:flex;gap:12px;align-items:flex-start}
+.menu-item img{width:120px;height:80px;object-fit:cover;border-radius:8px;flex-shrink:0}
+
+/* 2-line clamp for descriptions */
+.item-desc{
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:13px; color:var(--muted); max-width:540px;
+}
+
+/* details button */
+.exp-btn{background:transparent;border:1px solid #ffd6d6;padding:6px 8px;border-radius:8px;color:var(--accent)}
+
+/* cart & misc */
+.card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+.btn{padding:10px 16px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:600;text-decoration:none;display:inline-block}
+.btn.secondary{background:#fff;color:var(--accent);border:1px solid #ffdede}
+.small{color:var(--muted);font-size:13px}
+
+/* responsive */
+@media(max-width:900px){
+  .restaurant-card{flex-direction:column;align-items:flex-start}
+  .img-wrap{width:100%;height:160px}
+  .menu-item img{width:100px;height:72px}
+  .header-center{justify-content:flex-start}
+  .search-bar{max-width:100%}
+}
