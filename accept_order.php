@@ -1,1 +1,39 @@
-<?php include 'config.php'; if (!isset($_SESSION['delivery_person_id'])) { die('login required'); } $dpid = $_SESSION['delivery_person_id']; $oid = intval($_GET['order_id']); $stmt = $conn->prepare("UPDATE `Order` SET delivery_person_id=?, status='OUT_FOR_DELIVERY' WHERE order_id=? AND status='PLACED' AND (delivery_person_id IS NULL OR delivery_person_id=0)"); $stmt->bind_param('ii',$dpid,$oid); $stmt->execute(); if ($stmt->affected_rows===1){ $conn->query("UPDATE Delivery_Person SET status='BUSY' WHERE delivery_person_id=$dpid"); echo 'Claimed. <a href="delivery_dashboard.php">Back</a>'; } else { echo 'Already taken or unavailable'; } ?>
+<?php 
+include 'config.php';
+
+if (!isset($_SESSION['delivery_person_id'])) { 
+    die('login required'); 
+}
+
+$dpid = $_SESSION['delivery_person_id'];
+$oid  = intval($_GET['order_id']);
+
+// Attempt to claim the order
+$stmt = $conn->prepare("
+    UPDATE `Order` 
+    SET delivery_person_id = ?, status = 'OUT_FOR_DELIVERY' 
+    WHERE order_id = ? 
+      AND status = 'PLACED' 
+      AND (delivery_person_id IS NULL OR delivery_person_id = 0)
+");
+
+$stmt->bind_param('ii', $dpid, $oid);
+$stmt->execute();
+
+if ($stmt->affected_rows === 1) {
+
+    // Mark delivery person as busy
+    $conn->query("
+        UPDATE Delivery_Person 
+        SET status = 'BUSY' 
+        WHERE delivery_person_id = $dpid
+    ");
+
+    echo 'Claimed. <a href="delivery_dashboard.php">Back</a>';
+
+} else {
+
+    echo 'Already taken or unavailable';
+
+}
+?>
