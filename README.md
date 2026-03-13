@@ -95,11 +95,6 @@ food-ordering/
 
 ---
 
-## 📸 Screenshots
-
-> *(Add screenshots of the customer dashboard, order page, and delivery view here)*
-
----
 
 ## 📌 Notes
 
